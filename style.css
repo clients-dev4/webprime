@@ -2755,3 +2755,33 @@ a:focus-visible, button:focus-visible, .btn:focus-visible, input:focus-visible, 
     .ent-places-slots i { height: 26px; border-width: 2px; border-radius: 5px; }
     .ent-places-cta { padding: 15px 18px; font-size: 15px; }
 }
+
+
+/* ============ Compteur de places dans l'en-tête ============ */
+.ent-header .container { gap: 14px; }
+.ent-hplaces {
+    display: inline-flex; align-items: center; margin-right: auto;
+    background: var(--alert-red); color: #fff;
+    border: 3px solid var(--ink); border-radius: 999px;
+    padding: 7px 15px; font-size: 13.5px; font-weight: 700; line-height: 1;
+    box-shadow: var(--shadow-sm); white-space: nowrap;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.ent-hplaces:hover, .ent-hplaces:active { color: #fff; transform: translate(2px, 2px); box-shadow: 0 0 0 var(--ink); }
+.ent-hplaces i {
+    width: 8px; height: 8px; border-radius: 50%; background: #fff; margin-right: 9px; flex-shrink: 0;
+    animation: entHplacesBlink 1.6s ease-in-out infinite;
+}
+@keyframes entHplacesBlink { 0%, 100% { opacity: 1; } 50% { opacity: .2; } }
+.ent-hplaces b { font-weight: 800; font-size: 15.5px; }
+.ent-hplaces.is-full { background: #3f3f46; }
+.ent-hplaces.is-full i { animation: none; }
+
+@media (max-width: 1024px) { .ent-hplaces-long { display: none; } }
+@media (max-width: 400px) {
+    .ent-header .container { gap: 8px; }
+    .ent-hplaces { padding: 6px 11px; font-size: 11.5px; border-width: 2px; box-shadow: 2px 2px 0 var(--ink); }
+    .ent-hplaces i { width: 7px; height: 7px; margin-right: 6px; }
+    .ent-hplaces b { font-size: 13px; }
+    .ent-logo-img { height: 38px; }
+}

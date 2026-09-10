@@ -1,3 +1,11 @@
+/* =========================================================================
+   PLACES DISPONIBLES — le seul endroit à modifier
+   Change PLACES_PRISES quand un client entre ou sort : le compteur rouge de
+   l'en-tête (toutes les pages) et la section de l'accueil se recalculent seuls.
+   ========================================================================= */
+var PLACES_TOTAL  = 20;   // nombre maximum de clients accompagnés
+var PLACES_PRISES = 17;   // clients accompagnés aujourd'hui
+
 (function () {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -75,14 +83,29 @@
         });
     }
 
-    // Places limitées : slots, compteur et jauge (data-total / data-taken sur la section)
+    // Places limitées : badge de l'en-tête (toutes les pages) + section de l'accueil
+    var total = Math.max(1, PLACES_TOTAL);
+    var taken = Math.min(Math.max(0, PLACES_PRISES), total);
+    var free = total - taken;
+    var mot = free === 1 ? 'place' : 'places';
+
+    Array.prototype.forEach.call(document.querySelectorAll('.ent-places-free'), function (el) {
+        el.textContent = free;
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('.ent-hplaces-mot'), function (el) {
+        el.textContent = mot;
+    });
+    var hplaces = document.querySelector('.ent-hplaces');
+    if (hplaces) {
+        hplaces.setAttribute('aria-label', free > 0 ? free + ' ' + mot + ' disponibles sur ' + total : 'Complet');
+        if (free <= 0) {
+            hplaces.classList.add('is-full');
+            hplaces.innerHTML = '<i></i>Complet — liste d\'attente';
+        }
+    }
+
     var places = document.getElementById('places');
     if (places) {
-        var total = parseInt(places.getAttribute('data-total'), 10) || 20;
-        var taken = parseInt(places.getAttribute('data-taken'), 10) || 0;
-        if (taken > total) taken = total;
-        var free = total - taken;
-
         var slots = places.querySelector('.ent-places-slots');
         if (slots) {
             var html = '';
@@ -92,10 +115,8 @@
 
         var takenEl = places.querySelector('.ent-places-taken');
         var totalEl = places.querySelector('.ent-places-total');
-        var freeEl = places.querySelector('.ent-places-free');
         var fill = places.querySelector('.ent-places-bar i');
         if (totalEl) totalEl.textContent = total;
-        if (freeEl) freeEl.textContent = free;
         if (takenEl) takenEl.textContent = reduce ? taken : 0;
 
         function runPlaces() {
