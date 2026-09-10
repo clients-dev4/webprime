@@ -75,6 +75,56 @@
         });
     }
 
+    // Places limitées : slots, compteur et jauge (data-total / data-taken sur la section)
+    var places = document.getElementById('places');
+    if (places) {
+        var total = parseInt(places.getAttribute('data-total'), 10) || 20;
+        var taken = parseInt(places.getAttribute('data-taken'), 10) || 0;
+        if (taken > total) taken = total;
+        var free = total - taken;
+
+        var slots = places.querySelector('.ent-places-slots');
+        if (slots) {
+            var html = '';
+            for (var i = 0; i < total; i++) html += '<i class="' + (i < taken ? 'is-taken' : 'is-free') + '"></i>';
+            slots.innerHTML = html;
+        }
+
+        var takenEl = places.querySelector('.ent-places-taken');
+        var totalEl = places.querySelector('.ent-places-total');
+        var freeEl = places.querySelector('.ent-places-free');
+        var fill = places.querySelector('.ent-places-bar i');
+        if (totalEl) totalEl.textContent = total;
+        if (freeEl) freeEl.textContent = free;
+        if (takenEl) takenEl.textContent = reduce ? taken : 0;
+
+        function runPlaces() {
+            if (fill) fill.style.width = (taken / total * 100) + '%';
+            if (!takenEl || reduce) return;
+            var t0 = null, dur = 1500;
+            function step(ts) {
+                if (!t0) t0 = ts;
+                var p = Math.min((ts - t0) / dur, 1);
+                takenEl.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * taken);
+                if (p < 1) requestAnimationFrame(step); else takenEl.textContent = taken;
+            }
+            requestAnimationFrame(step);
+        }
+
+        if ('IntersectionObserver' in window) {
+            var po = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (!e.isIntersecting) return;
+                    po.unobserve(e.target);
+                    runPlaces();
+                });
+            }, { threshold: 0.3 });
+            po.observe(places.querySelector('.ent-places-panel') || places);
+        } else {
+            runPlaces();
+        }
+    }
+
     // Margin simulator
     var range = document.getElementById('simRange');
     if (range) {
