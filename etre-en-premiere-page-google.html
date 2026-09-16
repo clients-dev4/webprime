@@ -359,14 +359,21 @@
                 payload.append('Téléphone', fd.get('telephone') || '');
                 if (fd.get('secteur')) payload.append('Secteur d\'activité ciblé', fd.get('secteur'));
                 if (fd.get('message')) payload.append('Message', fd.get('message'));
-                payload.append('_subject', 'Nouvelle demande partenaire WebPrime — ' + (agence || prenom));
-                payload.append('_template', 'table');
-                payload.append('_captcha', 'false');
+                // Envoi au webhook de l'app WebPrime : champs standards + récap complet dans le message
+                var recap = ['DEMANDE PARTENAIRE — ' + (agence || prenom), ''];
+                payload.forEach(function (valeur, cle) { recap.push(cle + ' : ' + valeur); });
 
-                var response = await fetch('https://formsubmit.co/ajax/partenaire@webprime.fr', {
+                var envoi = new FormData();
+                envoi.append('name', prenom);
+                envoi.append('email', fd.get('email') || '');
+                envoi.append('phone', fd.get('telephone') || '');
+                envoi.append('company', agence);
+                envoi.append('subject', 'Demande partenaire — ' + (agence || prenom));
+                envoi.append('message', recap.join('\n'));
+
+                var response = await fetch('https://webprime.app/webhook/contact/bc024c6a49270fbd5c6410130a36f4a25f54b1d8af00affb5697d01be039f033', {
                     method: 'POST',
-                    body: payload,
-                    headers: { 'Accept': 'application/json' }
+                    body: envoi
                 });
 
                 if (response.ok) {
