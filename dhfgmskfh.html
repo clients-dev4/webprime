@@ -1383,6 +1383,23 @@
                 this.closest('.form-group').classList.remove('error');
             });
         });
+
+        (function () {
+            var p = new URLSearchParams(window.location.search);
+            [['email', 'email'], ['telephone', 'telephone'], ['entreprise', 'nom_entreprise']].forEach(function (c) {
+                var champ = document.getElementById(c[1]);
+                if (champ && p.get(c[0])) champ.value = p.get(c[0]);
+            });
+            var offre = p.get('offre');
+            if (offre) {
+                document.querySelectorAll('input[name="pack_choisi"]').forEach(function (r) {
+                    if (r.value === offre) {
+                        r.checked = true;
+                        updatePackAndSectorSections();
+                    }
+                });
+            }
+        })();
     </script>
 </body>
 </html>
