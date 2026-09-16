@@ -2773,8 +2773,6 @@ a:focus-visible, button:focus-visible, .btn:focus-visible, input:focus-visible, 
     .ent-logo-img { height: 38px; }
 }
 
-/* Prix des cards en mobile : bloc étendu sur toute la largeur, total plus gros */
-@media (max-width: 768px) {
-    .ent-offer .ent-price { align-self: stretch; padding: 16px 18px; font-size: 14px; }
-    .ent-offer .ent-price b { font-size: 46px; letter-spacing: -2px; }
-}
+/* Prix des cards : bloc étendu sur toute la largeur, total en gros */
+.ent-offer .ent-price { align-self: stretch; padding: 16px 18px; font-size: 14px; }
+.ent-offer .ent-price b { font-size: 46px; letter-spacing: -2px; }
