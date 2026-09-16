@@ -207,8 +207,12 @@
                 <div class="ent-card ent-offer reveal">
                     <span class="tag">Tarif public · 1 à 3 sites</span>
                     <h3>1 à 3 sites</h3>
-                    <div class="ent-price"><b>65,83€</b> / mois · par site</div>
-                    <p class="pt-hint">Soit 790€ l’année, facturé en une fois</p>
+                    <div class="price-toggle" role="tablist" aria-label="Durée d'engagement">
+                        <button type="button" class="pt-btn active" data-plan="year" aria-selected="true">1 an</button>
+                        <button type="button" class="pt-btn" data-plan="half" aria-selected="false">6 mois</button>
+                    </div>
+                    <div class="ent-price"><b data-year="65,83€" data-half="75€">65,83€</b> / mois · par site</div>
+                    <p class="pt-hint" data-year="Soit 790€ l’année, facturé en une fois" data-half="Soit 450€ les 6 mois, facturé en une fois">Soit 790€ l’année, facturé en une fois</p>
                     <ul>
                         <li>Création site internet</li>
                         <li>Refonte site internet</li>
@@ -221,15 +225,19 @@
                         <li>Modifications illimitées</li>
                         <li>Accès Admin App WebPrime</li>
                         <li>Interlocuteur dédié</li>
-                        <li>Engagement 1 an</li>
+                        <li data-year="Engagement 1 an" data-half="Engagement 6 mois">Engagement 1 an</li>
                     </ul>
                     <a title="prix referencement google" href="https://webprime.fr/etre-en-premiere-page-google.html" class="btn btn-primary">Devenir partenaire</a>
                 </div>
                 <div class="ent-card ent-offer reveal">
                     <span class="tag">Agence · tarif partenaire</span>
                     <h3>4 sites et +</h3>
-                    <div class="ent-price"><b>57,50€</b> / mois · par site</div>
-                    <p class="pt-hint">690€ l’année par site, facturé en une fois</p>
+                    <div class="price-toggle" role="tablist" aria-label="Durée d'engagement">
+                        <button type="button" class="pt-btn active" data-plan="year" aria-selected="true">1 an</button>
+                        <button type="button" class="pt-btn" data-plan="half" aria-selected="false">6 mois</button>
+                    </div>
+                    <div class="ent-price"><b data-year="57,50€" data-half="65,83€">57,50€</b> / mois · par site</div>
+                    <p class="pt-hint" data-year="690€ l’année par site, facturé en une fois" data-half="395€ les 6 mois par site, facturé en une fois">690€ l’année par site, facturé en une fois</p>
                     <ul>
                         <li>Création site internet</li>
                         <li>Refonte site internet</li>
@@ -242,7 +250,7 @@
                         <li>Modifications illimitées</li>
                         <li>Accès Admin App WebPrime</li>
                         <li>Interlocuteur dédié</li>
-                        <li>Engagement 1 an</li>
+                        <li data-year="Engagement 1 an" data-half="Engagement 6 mois">Engagement 1 an</li>
                     </ul>
                     <a title="référencer son entreprise sur google" href="https://webprime.fr/etre-en-premiere-page-google.html" class="btn btn-primary">Devenir partenaire</a>
                 </div>

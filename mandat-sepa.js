@@ -10,6 +10,9 @@ var CREANCIER = {
 
 var form = document.getElementById('mandatForm');
 var rum = genererRum();
+var PERIODE = OFFRE.semestriel
+    ? { type: 'récurrent (tous les 6 mois)', montant: 'Montant tous les 6 mois', engagement: 'engagement 6 mois' }
+    : { type: 'récurrent (annuel)', montant: 'Montant annuel', engagement: 'engagement 1 an' };
 
 document.getElementById('creancierNom').textContent = CREANCIER.nom;
 document.getElementById('creancierNom2').textContent = CREANCIER.nom;
@@ -126,10 +129,10 @@ form.addEventListener('submit', async function (e) {
         'MANDAT DE PRÉLÈVEMENT SEPA — ACCEPTÉ EN LIGNE',
         'RUM : ' + rum,
         'Signé le : ' + dateSignature + ' — lieu : ' + form.ville.value.trim(),
-        'Type : récurrent (annuel)',
+        'Type : ' + PERIODE.type,
         '',
         'Formule : ' + f.libelle,
-        'Montant annuel : ' + formaterEuros(f.total),
+        PERIODE.montant + ' : ' + formaterEuros(f.total),
         '',
         'Titulaire : ' + nomComplet,
         'Raison sociale : ' + (form.entreprise.value.trim() || 'Non renseigné'),
@@ -137,7 +140,7 @@ form.addEventListener('submit', async function (e) {
         'IBAN : ' + iban,
         '',
         'Créancier : ' + CREANCIER.nom + ' — ICS ' + CREANCIER.ics,
-        'Mandat accepté : oui — Formule et engagement 1 an acceptés : oui'
+        'Mandat accepté : oui — Formule et ' + PERIODE.engagement + ' acceptés : oui'
     ].join('\n');
 
     var payload = new FormData();
@@ -151,7 +154,8 @@ form.addEventListener('submit', async function (e) {
     payload.append('iban', iban);
     payload.append('adresse', adresse);
     payload.append('formule', f.libelle);
-    payload.append('montant_annuel', String(f.total));
+    payload.append('montant', String(f.total));
+    payload.append('periodicite', PERIODE.type);
     payload.append('date_signature', maintenant.toISOString());
 
     try {
@@ -178,7 +182,7 @@ function afficherConfirmation(f, nomComplet, iban, dateSignature) {
     [
         ['Référence (RUM)', rum],
         ['Formule', f.libelle],
-        ['Montant annuel', formaterEuros(f.total)],
+        [PERIODE.montant, formaterEuros(f.total)],
         ['Titulaire', nomComplet],
         ['IBAN', masquerIban(iban)],
         ['Signé le', dateSignature],
