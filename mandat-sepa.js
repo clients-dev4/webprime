@@ -12,7 +12,7 @@ var form = document.getElementById('mandatForm');
 var rum = genererRum();
 var PERIODE = OFFRE.semestriel
     ? { type: 'récurrent (tous les 6 mois)', montant: 'Montant tous les 6 mois', engagement: 'engagement 6 mois' }
-    : { type: 'récurrent (annuel)', montant: 'Montant annuel', engagement: 'engagement 1 an' };
+    : { type: 'récurrent (annuel)', montant: OFFRE.prixSuivant ? 'Montant 1ère année' : 'Montant annuel', engagement: 'engagement 1 an' };
 
 document.getElementById('creancierNom').textContent = CREANCIER.nom;
 document.getElementById('creancierNom2').textContent = CREANCIER.nom;
@@ -133,6 +133,7 @@ form.addEventListener('submit', async function (e) {
         '',
         'Formule : ' + f.libelle,
         PERIODE.montant + ' : ' + formaterEuros(f.total),
+        OFFRE.prixSuivant ? 'Années suivantes : ' + formaterEuros(OFFRE.prixSuivant) + ' / an' : null,
         '',
         'Titulaire : ' + nomComplet,
         'Raison sociale : ' + (form.entreprise.value.trim() || 'Non renseigné'),
@@ -141,7 +142,7 @@ form.addEventListener('submit', async function (e) {
         '',
         'Créancier : ' + CREANCIER.nom + ' — ICS ' + CREANCIER.ics,
         'Mandat accepté : oui — Formule et ' + PERIODE.engagement + ' acceptés : oui'
-    ].join('\n');
+    ].filter(function (l) { return l !== null; }).join('\n');
 
     var payload = new FormData();
     payload.append('name', nomComplet);
@@ -156,6 +157,7 @@ form.addEventListener('submit', async function (e) {
     payload.append('formule', f.libelle);
     payload.append('montant', String(f.total));
     payload.append('periodicite', PERIODE.type);
+    if (OFFRE.prixSuivant) payload.append('montant_annees_suivantes', String(OFFRE.prixSuivant));
     payload.append('date_signature', maintenant.toISOString());
 
     try {
@@ -183,11 +185,12 @@ function afficherConfirmation(f, nomComplet, iban, dateSignature) {
         ['Référence (RUM)', rum],
         ['Formule', f.libelle],
         [PERIODE.montant, formaterEuros(f.total)],
+        OFFRE.prixSuivant ? ['Années suivantes', formaterEuros(OFFRE.prixSuivant) + ' / an'] : null,
         ['Titulaire', nomComplet],
         ['IBAN', masquerIban(iban)],
         ['Signé le', dateSignature],
         ['Créancier', CREANCIER.nom + ' — ICS ' + CREANCIER.ics]
-    ].forEach(function (l) {
+    ].filter(Boolean).forEach(function (l) {
         var dt = document.createElement('dt'); dt.textContent = l[0];
         var dd = document.createElement('dd'); dd.textContent = l[1];
         dl.appendChild(dt); dl.appendChild(dd);
