@@ -51,21 +51,11 @@ function masquerIban(v) {
 function formaterEuros(n) { return n.toLocaleString('fr-FR') + '€'; }
 
 function calculerFormule() {
-    var sites = OFFRE.minSites;
-    if (form.nb_sites) {
-        sites = parseInt(form.nb_sites.value, 10);
-        if (!(sites >= OFFRE.minSites && sites <= OFFRE.maxSites)) return null;
-    }
-    var libelle = OFFRE.libelle + (form.nb_sites ? ' (' + sites + ' site' + (sites > 1 ? 's' : '') + ')' : '');
-    return { libelle: libelle, sites: sites, prixSite: OFFRE.prixSite, total: sites * OFFRE.prixSite };
+    return { libelle: OFFRE.libelle, total: OFFRE.prix };
 }
 
 function majTotal() {
-    var f = calculerFormule();
-    document.getElementById('totalLabel').textContent = f && f.sites > 1
-        ? 'Montant prélevé chaque année (' + f.sites + ' × ' + formaterEuros(f.prixSite) + ')'
-        : 'Montant prélevé chaque année';
-    document.getElementById('totalAmount').textContent = f ? formaterEuros(f.total) : '—';
+    document.getElementById('totalAmount').textContent = formaterEuros(OFFRE.prix);
 }
 
 function majSignature() {
@@ -94,7 +84,6 @@ function valider() {
 
 function prefillDepuisUrl() {
     var p = new URLSearchParams(window.location.search);
-    if (form.nb_sites && p.get('sites')) form.nb_sites.value = parseInt(p.get('sites'), 10) || OFFRE.minSites;
     if (p.get('email')) form.email.value = p.get('email');
 }
 
@@ -104,7 +93,6 @@ form.iban.addEventListener('input', function () {
     if (fin) this.selectionStart = this.selectionEnd = this.value.length;
 });
 
-if (form.nb_sites) form.nb_sites.addEventListener('input', majTotal);
 form.ville.addEventListener('input', majSignature);
 
 form.querySelectorAll('.form-group input').forEach(function (el) {
@@ -141,7 +129,7 @@ form.addEventListener('submit', async function (e) {
         'Type : récurrent (annuel)',
         '',
         'Formule : ' + f.libelle,
-        'Montant annuel : ' + formaterEuros(f.total) + (f.sites > 1 ? ' (' + f.sites + ' × ' + formaterEuros(f.prixSite) + ')' : ''),
+        'Montant annuel : ' + formaterEuros(f.total),
         '',
         'Titulaire : ' + nomComplet,
         'Raison sociale : ' + (form.entreprise.value.trim() || 'Non renseigné'),
