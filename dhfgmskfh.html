@@ -378,7 +378,6 @@
                         <input type="text" id="website" name="_gotcha" autocomplete="off">
                     </div>
 
-                    <!-- ── PAGE 1 : Vous & Pack ── -->
                     <div class="form-page active" data-page="1">
                         <h2 class="form-page-title">Vous & votre offre</h2>
                         <p class="form-page-subtitle">Identifions-nous pour démarrer</p>
@@ -458,7 +457,6 @@
                         </div>
                     </div>
 
-                    <!-- ── PAGE 2 : Entreprise ── -->
                     <div class="form-page" data-page="2">
                         <h2 class="form-page-title">Votre entreprise</h2>
                         <p class="form-page-subtitle">Les informations légales et l'identité de votre activité</p>
@@ -495,7 +493,6 @@
                         </div>
                     </div>
 
-                    <!-- ── PAGE 3 : Coordonnées publiques ── -->
                     <div class="form-page" data-page="3">
                         <h2 class="form-page-title">Coordonnées à afficher</h2>
                         <p class="form-page-subtitle">Ces informations seront visibles sur votre site</p>
@@ -560,7 +557,6 @@
                         </div>
                     </div>
 
-                    <!-- ── PAGE 4 : Branding & réseaux ── -->
                     <div class="form-page" data-page="4">
                         <h2 class="form-page-title">Branding & présence en ligne</h2>
                         <p class="form-page-subtitle">Votre identité visuelle et vos profils sociaux</p>
@@ -641,7 +637,6 @@
                         </div>
                     </div>
 
-                    <!-- ── PAGE 5 : Contenu de votre activité ── -->
                     <div class="form-page" data-page="5">
                         <h2 class="form-page-title">Contenu de votre activité</h2>
                         <p class="form-page-subtitle">Le matériel dont nous avons besoin pour rédiger votre site</p>
@@ -676,7 +671,6 @@
                             <div class="error-msg">Ce champ est requis</div>
                         </div>
 
-                        <!-- ── Sections conditionnelles selon le secteur ── -->
 
                         <div class="sector-section" id="sec-restauration">
                             <h3 class="form-section-title">Restauration</h3>
@@ -808,12 +802,10 @@
                         </div>
                     </div>
 
-                    <!-- ── PAGE 6 : Spécificités du pack ── -->
                     <div class="form-page" data-page="6">
                         <h2 class="form-page-title">Spécificités de votre offre</h2>
                         <p class="form-page-subtitle">Les éléments propres à votre offre</p>
 
-                        <!-- ── Section conditionnelle E-Commerce ── -->
                         <div class="pack-section" id="section-ecommerce">
                             <h3 class="form-section-title">E-Commerce — Produits & vente</h3>
 
@@ -875,11 +867,9 @@
                             </div>
                         </div>
 
-                        <!-- ── Section conditionnelle Booking (sous-variantes selon secteur) ── -->
                         <div class="pack-section" id="section-booking">
                             <h3 class="form-section-title">Booking — Réservations</h3>
 
-                            <!-- Variante générique (coiffeur, garage, cabinet, coach, avocat…) -->
                             <div class="booking-variant" id="booking-default">
                                 <div class="form-group">
                                     <label for="prestations_resa">Prestations réservables <span class="required">*</span></label>
@@ -911,7 +901,6 @@
                                 </div>
                             </div>
 
-                            <!-- Variante Restauration (réservation de tables) -->
                             <div class="booking-variant" id="booking-restaurant">
                                 <div class="form-group">
                                     <label for="resto_creneaux">Créneaux de service <span class="required">*</span></label>
@@ -938,7 +927,6 @@
                                 </div>
                             </div>
 
-                            <!-- Variante Événementiel (location de salle / billetterie événements) -->
                             <div class="booking-variant" id="booking-event">
                                 <div class="form-group">
                                     <label for="event_venue_type">Type de réservation <span class="required">*</span></label>
@@ -981,7 +969,6 @@
                                 </div>
                             </div>
 
-                            <!-- Champs communs aux 3 variantes (annulation + paiement) -->
                             <div class="form-group">
                                 <label for="annulation">Politique d'annulation <span class="required">*</span></label>
                                 <input type="text" id="annulation" name="annulation" placeholder="Ex : Annulation gratuite jusqu'à 24h avant">
@@ -1115,7 +1102,6 @@
                 return false;
             }
 
-            // Inputs/select/textarea required (only visible ones)
             pageEl.querySelectorAll('input[required], select[required], textarea[required]').forEach(function (input) {
                 if (input.type === 'radio' || input.type === 'checkbox') return;
                 if (isHiddenConditional(input)) return;
@@ -1125,7 +1111,6 @@
                 }
             });
 
-            // Radio groups (skip hidden)
             pageEl.querySelectorAll('.radio-group').forEach(function (group) {
                 if (isHiddenConditional(group)) return;
                 var firstRadio = group.querySelector('input[type="radio"]');
@@ -1139,7 +1124,6 @@
                 }
             });
 
-            // Checkbox groups (skip hidden, skip standalone single checkboxes)
             pageEl.querySelectorAll('.checkbox-group').forEach(function (group) {
                 if (isHiddenConditional(group)) return;
                 var formGroup = group.closest('.form-group');
@@ -1164,7 +1148,6 @@
             showPage(fromPage - 1);
         }
 
-        // Show conditional access field if user has existing site
         document.getElementById('site_actuel').addEventListener('input', function () {
             var condAcces = document.getElementById('cond-acces-site');
             if (this.value.trim().length > 0) {
@@ -1198,7 +1181,6 @@
             var pack = getPackValue();
             var secteur = (document.getElementById('secteur') || {}).value || '';
 
-            // Pack-specific
             var ecom = document.getElementById('section-ecommerce');
             var booking = document.getElementById('section-booking');
             var noPackNote = document.getElementById('no-pack-specifics');
@@ -1215,7 +1197,6 @@
                 noPackNote.style.display = '';
             }
 
-            // Booking variant (depends on secteur)
             allBookingVariants.forEach(function (id) {
                 document.getElementById(id).classList.remove('visible');
             });
@@ -1229,14 +1210,12 @@
                 }
             }
 
-            // Sector-specific (page 5)
             allSectorSections.forEach(function (id) {
                 document.getElementById(id).classList.remove('visible');
             });
             var target = sectorMap[secteur];
             if (target) document.getElementById(target).classList.add('visible');
 
-            // Zone d'intervention (page 3) — visible uniquement pour Artisan/Auto
             var zoneWrap = document.getElementById('zone-wrap');
             if (zoneWrap) {
                 if (secteur === 'Artisan / Bâtiment' || secteur === 'Auto / Garage') {
@@ -1275,19 +1254,16 @@
 
                 var data = {};
 
-                // Identité contact
                 data['Nom de l\'entreprise'] = nomEntreprise;
                 data['Email pro'] = fd.get('email') || '';
                 data['Téléphone pro'] = fd.get('telephone') || '';
                 data['Offre choisie'] = pack;
                 data['Secteur'] = fd.get('secteur') || 'Non renseigné';
 
-                // Entreprise
                 data['SIRET'] = fd.get('siret') || '';
                 if (fd.get('site_actuel')) data['Site actuel'] = fd.get('site_actuel');
                 if (fd.get('acces_site')) data['Accès site actuel'] = fd.get('acces_site');
 
-                // Coordonnées publiques
                 data['Adresse complète'] = fd.get('adresse') || '';
                 data['Adresse à afficher'] = fd.get('adresse_public') || 'Non renseigné';
                 data['Téléphone (à afficher)'] = fd.get('tel_public') || '';
@@ -1296,13 +1272,11 @@
                 data['Horaires'] = fd.get('horaires') || '';
                 if (fd.get('zone')) data['Zone d\'intervention'] = fd.get('zone');
 
-                // Branding
                 data['Logo'] = fd.get('logo_status') || 'Non renseigné';
                 if (fd.get('couleurs_libre')) data['Couleurs'] = 'Carte blanche';
                 else if (fd.get('couleurs')) data['Couleurs'] = fd.get('couleurs');
                 if (fd.get('inspiration')) data['Sites inspiration'] = fd.get('inspiration');
 
-                // Réseaux sociaux
                 if (fd.get('gmb')) data['Google My Business'] = fd.get('gmb');
                 if (fd.get('instagram')) data['Instagram'] = fd.get('instagram');
                 if (fd.get('facebook')) data['Facebook'] = fd.get('facebook');
@@ -1310,13 +1284,11 @@
                 if (fd.get('linkedin')) data['LinkedIn'] = fd.get('linkedin');
                 if (fd.get('youtube')) data['YouTube'] = fd.get('youtube');
 
-                // Contenu — Communs
                 data['À propos'] = fd.get('a_propos') || '';
                 if (fd.get('temoignages')) data['Témoignages clients'] = fd.get('temoignages');
                 data['Mots-clés Google'] = fd.get('mots_cles_google') || '';
                 data['Services / prestations'] = fd.get('services') || '';
 
-                // Contenu — Sectoriel (uniquement si rempli)
                 [
                     ['resto_carte', 'Carte / menu'],
                     ['resto_specialites', 'Cuisine / spécialités'],
@@ -1342,7 +1314,6 @@
                     if (v) data[pair[1]] = v;
                 });
 
-                // E-Commerce (only if pack matches)
                 if (pack === 'Site e-commerce') {
                     data['Catalogue produits'] = fd.get('catalogue') || '';
                     if (fd.get('variantes')) data['Variantes produits'] = fd.get('variantes');
@@ -1350,7 +1321,6 @@
                     data['Modes de livraison'] = fd.getAll('modes_livraison').join(', ');
                 }
 
-                // Booking (only if pack matches — variantes selon secteur)
                 if (pack === 'Site booking') {
                     var secteur = fd.get('secteur') || '';
                     if (secteur === 'Restauration') {
@@ -1376,7 +1346,6 @@
 
                 if (fd.get('commentaires')) data['Commentaires'] = fd.get('commentaires');
 
-                // Envoi au webhook de l'app WebPrime : champs standards + récap complet dans le message
                 var payload = new FormData();
                 payload.append('name', nomEntreprise);
                 payload.append('email', fd.get('email') || '');
