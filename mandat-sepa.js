@@ -86,8 +86,6 @@ function valider() {
     });
 
     if (form.iban.value.trim() && !ibanValide(form.iban.value)) ok = erreur(form.iban);
-    var bic = form.bic.value.replace(/\s+/g, '').toUpperCase();
-    if (bic && !/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(bic)) ok = erreur(form.bic);
     if (!form.accept_mandat.checked) ok = erreur(form.accept_mandat);
     if (!form.accept_engagement.checked) ok = erreur(form.accept_engagement);
 
@@ -134,7 +132,6 @@ form.addEventListener('submit', async function (e) {
     var dateSignature = maintenant.toLocaleDateString('fr-FR') + ' à ' + maintenant.toLocaleTimeString('fr-FR');
     var nomComplet = form.prenom.value.trim() + ' ' + form.nom.value.trim();
     var iban = normaliserIban(form.iban.value);
-    var bic = form.bic.value.replace(/\s+/g, '').toUpperCase();
     var adresse = form.adresse.value.trim() + ', ' + form.cp.value.trim() + ' ' + form.ville.value.trim();
 
     var recap = [
@@ -150,7 +147,6 @@ form.addEventListener('submit', async function (e) {
         'Raison sociale : ' + (form.entreprise.value.trim() || 'Non renseigné'),
         'Adresse : ' + adresse,
         'IBAN : ' + iban,
-        'BIC : ' + (bic || 'Non renseigné'),
         '',
         'Créancier : ' + CREANCIER.nom + ' — ICS ' + CREANCIER.ics,
         'Mandat accepté : oui — Formule et engagement 1 an acceptés : oui'
@@ -165,7 +161,6 @@ form.addEventListener('submit', async function (e) {
     payload.append('message', recap);
     payload.append('rum', rum);
     payload.append('iban', iban);
-    payload.append('bic', bic);
     payload.append('adresse', adresse);
     payload.append('formule', f.libelle);
     payload.append('montant_annuel', String(f.total));
