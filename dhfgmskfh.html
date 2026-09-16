@@ -380,7 +380,7 @@
 
                     <!-- ── PAGE 1 : Vous & Pack ── -->
                     <div class="form-page active" data-page="1">
-                        <h2 class="form-page-title">Vous & votre pack</h2>
+                        <h2 class="form-page-title">Vous & votre offre</h2>
                         <p class="form-page-subtitle">Identifions-nous pour démarrer</p>
 
                         <div class="form-group">
@@ -402,35 +402,35 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Quel pack avez-vous choisi ? <span class="required">*</span></label>
+                            <label>Quelle offre avez-vous choisie ? <span class="required">*</span></label>
                             <div class="radio-group">
                                 <label class="radio-option">
-                                    <input type="radio" name="pack_choisi" value="Pack 1ère page Google" required>
+                                    <input type="radio" name="pack_choisi" value="Référencement 1ère page Google (6 mois)" required>
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">Pack 1ère page Google</span>
+                                    <span class="option-text">Référencement 1ère page Google — 450€ les 6 mois</span>
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="pack_choisi" value="Site Vitrine">
+                                    <input type="radio" name="pack_choisi" value="Référencement 1ère page Google (1 an)">
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">Site Vitrine</span>
+                                    <span class="option-text">Référencement 1ère page Google — 790€ l'année</span>
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="pack_choisi" value="Site Booking (sans paiement)">
+                                    <input type="radio" name="pack_choisi" value="Site vitrine">
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">Site Booking sans paiement</span>
+                                    <span class="option-text">Site vitrine — 389€ la 1ère année, puis 289€/an</span>
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="pack_choisi" value="Site Booking (avec paiement)">
+                                    <input type="radio" name="pack_choisi" value="Site e-commerce">
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">Site Booking avec paiement</span>
+                                    <span class="option-text">Site e-commerce — 489€ la 1ère année, puis 389€/an</span>
                                 </label>
                                 <label class="radio-option">
-                                    <input type="radio" name="pack_choisi" value="Site E-Commerce">
+                                    <input type="radio" name="pack_choisi" value="Site booking">
                                     <span class="custom-radio"></span>
-                                    <span class="option-text">Site E-Commerce</span>
+                                    <span class="option-text">Site booking — 589€ la 1ère année, puis 489€/an</span>
                                 </label>
                             </div>
-                            <div class="error-msg">Veuillez sélectionner votre pack</div>
+                            <div class="error-msg">Veuillez sélectionner votre offre</div>
                         </div>
 
                         <div class="form-group">
@@ -593,7 +593,7 @@
                         <div class="form-group">
                             <label class="checkbox-option" style="cursor: pointer;">
                                 <input type="checkbox" name="couleurs_libre" value="Oui">
-                                <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                 <span class="option-text">À votre goût (carte blanche)</span>
                             </label>
                         </div>
@@ -646,8 +646,8 @@
                         <h2 class="form-page-title">Contenu de votre activité</h2>
                         <p class="form-page-subtitle">Le matériel dont nous avons besoin pour rédiger votre site</p>
 
-                        <div class="info-box" style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
-                            <p style="color: #4ade80; font-size: 14px; margin: 0;">📸 <strong>Photos & vidéos :</strong> nous vous contacterons par WhatsApp pour la transmission de toutes les photos (lieu, équipe, plats, réalisations, etc.). Pas besoin de les fournir ici.</p>
+                        <div class="info-box" style="background: var(--bg-alt); border: 3px solid var(--ink); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+                            <p style="color: var(--text-body); font-size: 14px; margin: 0;">📸 <strong>Photos & vidéos :</strong> nous vous contacterons par WhatsApp pour la transmission de toutes les photos (lieu, équipe, plats, réalisations, etc.). Pas besoin de les fournir ici.</p>
                         </div>
 
                         <div class="form-group">
@@ -810,8 +810,8 @@
 
                     <!-- ── PAGE 6 : Spécificités du pack ── -->
                     <div class="form-page" data-page="6">
-                        <h2 class="form-page-title">Spécificités de votre pack</h2>
-                        <p class="form-page-subtitle">Les éléments propres à votre formule</p>
+                        <h2 class="form-page-title">Spécificités de votre offre</h2>
+                        <p class="form-page-subtitle">Les éléments propres à votre offre</p>
 
                         <!-- ── Section conditionnelle E-Commerce ── -->
                         <div class="pack-section" id="section-ecommerce">
@@ -835,17 +835,17 @@
                                 <div class="checkbox-group">
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="modes_paiement" value="CB Stripe">
-                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                         <span class="option-text">CB (Stripe)</span>
                                     </label>
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="modes_paiement" value="PayPal">
-                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                         <span class="option-text">PayPal</span>
                                     </label>
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="modes_paiement" value="Apple Pay">
-                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                         <span class="option-text">Apple Pay</span>
                                     </label>
                                 </div>
@@ -857,17 +857,17 @@
                                 <div class="checkbox-group">
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="modes_livraison" value="Colissimo">
-                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                         <span class="option-text">Colissimo</span>
                                     </label>
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="modes_livraison" value="Mondial Relay">
-                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                         <span class="option-text">Mondial Relay</span>
                                     </label>
                                     <label class="checkbox-option">
                                         <input type="checkbox" name="modes_livraison" value="Retrait magasin">
-                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#fff" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                                        <span class="custom-check"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
                                         <span class="option-text">Retrait magasin</span>
                                     </label>
                                 </div>
@@ -1011,7 +1011,7 @@
                             </div>
                         </div>
 
-                        <p class="form-helper" id="no-pack-specifics" style="text-align:center; padding: 20px 0;">Aucune spécificité supplémentaire pour votre pack — vous pouvez passer à l'étape finale.</p>
+                        <p class="form-helper" id="no-pack-specifics" style="text-align:center; padding: 20px 0;">Aucune spécificité supplémentaire pour votre offre — vous pouvez passer à l'étape finale.</p>
 
                         <h3 class="form-section-title">Détails complémentaires</h3>
 
@@ -1036,16 +1036,15 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>WebPrime</h4>
-                    <p>Création de sites internet et applications mobiles haut de gamme partout en France</p>
+                    <p>Création de sites internet et référencement en 1ère page Google partout en France.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Nos Services</h4>
                     <ul>
-                        <li><a href="https://daelia-digital.fr">Pack 1ère Page Google</a></li>
-                        <li><a href="https://daelia-digital.fr">Site Vitrine</a></li>
-                        <li><a href="https://daelia-digital.fr">Site Booking</a></li>
-                        <li><a href="https://daelia-digital.fr">Site E-Commerce</a></li>
-                        <li><a href="https://daelia-digital.fr">Application Mobile</a></li>
+                        <li><a href="https://webprime.fr/prix-referencement-google.html">Référencement 1ère page Google</a></li>
+                        <li>Site vitrine</li>
+                        <li>Site e-commerce</li>
+                        <li>Site booking</li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -1208,8 +1207,8 @@
             var noPackNote = document.getElementById('no-pack-specifics');
             ecom.classList.remove('visible');
             booking.classList.remove('visible');
-            var isBooking = (pack === 'Site Booking (sans paiement)' || pack === 'Site Booking (avec paiement)');
-            if (pack === 'Site E-Commerce') {
+            var isBooking = (pack === 'Site booking');
+            if (pack === 'Site e-commerce') {
                 ecom.classList.add('visible');
                 noPackNote.style.display = 'none';
             } else if (isBooking) {
@@ -1287,7 +1286,7 @@
                 data['Nom de l\'entreprise'] = nomEntreprise;
                 data['Email pro'] = fd.get('email') || '';
                 data['Téléphone pro'] = fd.get('telephone') || '';
-                data['Pack choisi'] = pack;
+                data['Offre choisie'] = pack;
                 data['Secteur'] = fd.get('secteur') || 'Non renseigné';
 
                 // Entreprise
@@ -1351,7 +1350,7 @@
                 });
 
                 // E-Commerce (only if pack matches)
-                if (pack === 'Site E-Commerce') {
+                if (pack === 'Site e-commerce') {
                     data['Catalogue produits'] = fd.get('catalogue') || '';
                     if (fd.get('variantes')) data['Variantes produits'] = fd.get('variantes');
                     data['Modes de paiement'] = fd.getAll('modes_paiement').join(', ');
@@ -1359,7 +1358,7 @@
                 }
 
                 // Booking (only if pack matches — variantes selon secteur)
-                if (pack === 'Site Booking (sans paiement)' || pack === 'Site Booking (avec paiement)') {
+                if (pack === 'Site booking') {
                     var secteur = fd.get('secteur') || '';
                     if (secteur === 'Restauration') {
                         data['Booking — Créneaux service'] = fd.get('resto_creneaux') || '';
