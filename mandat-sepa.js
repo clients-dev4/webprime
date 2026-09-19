@@ -14,7 +14,9 @@ var RIB = {
 
 var form = document.getElementById('mandatForm');
 var rum = genererRum();
-var PERIODE = OFFRE.semestriel
+var PERIODE = OFFRE.mensuel
+    ? { type: 'récurrent (mensuel)', montant: 'Montant mensuel', engagement: 'sans engagement' }
+    : OFFRE.semestriel
     ? { type: 'récurrent (tous les 6 mois)', montant: 'Montant tous les 6 mois', engagement: 'engagement 6 mois' }
     : { type: 'récurrent (annuel)', montant: OFFRE.prixSuivant ? 'Montant 1ère année' : 'Montant annuel', engagement: 'engagement 1 an' };
 
@@ -59,6 +61,7 @@ function formaterEuros(n) { return n.toLocaleString('fr-FR') + '€'; }
 
 function texteSuiteVirement() {
     if (OFFRE.prixSuivant) return 'Les années suivantes (' + formaterEuros(OFFRE.prixSuivant) + ' / an) sont ensuite prélevées automatiquement par prélèvement SEPA.';
+    if (OFFRE.mensuel) return 'Les mois suivants sont ensuite prélevés automatiquement par prélèvement SEPA. Sans engagement, résiliable à tout moment.';
     return 'Les renouvellements sont ensuite prélevés automatiquement par prélèvement SEPA, ' + (OFFRE.semestriel ? 'tous les 6 mois.' : 'chaque année.');
 }
 
@@ -196,7 +199,7 @@ form.addEventListener('submit', async function (e) {
         'IBAN : ' + iban,
         '',
         'Créancier : ' + CREANCIER.nom + ' — ICS ' + CREANCIER.ics,
-        'Mandat accepté : oui — Formule et ' + PERIODE.engagement + ' acceptés : oui'
+        'Mandat accepté : oui — Formule' + (OFFRE.mensuel ? ' (sans engagement) acceptée' : ' et ' + PERIODE.engagement + ' acceptés') + ' : oui'
     ].filter(function (l) { return l !== null; }).join('\n');
 
     var payload = new FormData();
@@ -230,7 +233,7 @@ function packFormulaire() {
     if (/^Site vitrine/.test(OFFRE.libelle)) return 'Site vitrine';
     if (/^Site e-commerce/.test(OFFRE.libelle)) return 'Site e-commerce';
     if (/^Site booking/.test(OFFRE.libelle)) return 'Site booking';
-    return OFFRE.semestriel ? 'Pack 1ère page Google (6 mois)' : 'Pack 1ère page Google (1 an)';
+    return 'Pack 1ère page Google';
 }
 
 function lienFormulaireProjet() {
